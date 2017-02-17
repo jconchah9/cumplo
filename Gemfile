@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.0.1'
-gem 'sqlite3'
+gem 'pg'
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -21,7 +21,15 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootstrap-material-design'
 gem 'materialize-sass'
 gem 'mui-sass'
+gem 'whenever'
 gem 'inline_svg'
+gem 'sidekiq'
+
+group :production, :staging do
+  gem 'rails_12factor'
+  gem 'rails_stdout_logging'
+  gem 'rails_serve_static_assets'
+end
 
 group :development, :test do
   gem 'byebug', platform: :mri

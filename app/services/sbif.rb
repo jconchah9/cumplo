@@ -1,4 +1,3 @@
-require 'hash'
 class Sbif
   include HTTParty
 
@@ -14,20 +13,6 @@ class Sbif
     @response = self.response(resource)
   end
 
-  def min_max(method=nil)
-    self.data.map { |x| x[:value] }.flatten.map(&:to_f).send(method)
-  end
-
-  def average
-    self.data.map { |x| x[:value].to_f }.reduce(:+) / self.data.size
-  end
-
-  def chart_data
-    data = []
-    self.data.map { |x| data += [ [ x[:date], x[:value] ] ] }
-    data
-  end
-
   def data
     data = []
     @response.map { |x| data += [ date: x['Fecha'], value: x['Valor'].gsub('.','').gsub(',','.').to_f ] }
@@ -35,12 +20,10 @@ class Sbif
   end
 
   def response(resource)
-    response = nil
-    case resource
-    when 'uf' then response = self.symbolize_keys_deep!(@response)[:indicadores_financieros][:u_fs][:uf]
-    when 'dolar' then response = self.symbolize_keys_deep!(@response)[:indicadores_financieros][:dolares][:dolar]
-    end
-    response
+    response = case resource
+                when 'uf' then self.symbolize_keys_deep!(@response)[:indicadores_financieros][:u_fs][:uf]
+                when 'dolar' then self.symbolize_keys_deep!(@response)[:indicadores_financieros][:dolares][:dolar]
+                end
   end
 
   def symbolize_keys_deep!(h)

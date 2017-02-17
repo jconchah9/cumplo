@@ -1,24 +1,28 @@
-# README
+# Cumplo
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Obten la información de la UF, Dolar del periodo que consultes,
+para ello tienes que primero registrarte
 
-Things you may want to cover:
+## Instalación
 
-* Ruby version
+Ejecuta en tu consola
 
-* System dependencies
+    $ bundle
+    $ rails db:create
+    $ rails db:migrate
 
-* Configuration
+Para que tengas la informacion de sbif en tu local ejecuta la siguente tarea
 
-* Database creation
+    $ rails sbif:default_data
 
-* Database initialization
+Después de termina la tarea
 
-* How to run the test suite
+    $ rails s
 
-* Services (job queues, cache servers, search engines, etc.)
+## Relevante
 
-* Deployment instructions
+la aplicacion cuenta con jobs >> SettingSbifJob, que se ejecuta una vez al dia a las 00:05 para actualizar la informacion de la UF y Dolar del periodo actual.
 
-* ...
+O ejecutar en consola la tarea asociada para el ajuste diario
+
+    $ rails sbif:daily_setting
