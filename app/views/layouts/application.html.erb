@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cumplo</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <nav class="navbar green accent-4 navbar-static-top">
+    <div class="container-fluid">
+      <div class="col-md-6">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">
+            <%= image_tag 'logo', class:'logo' %>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-6">
+      <% if account_signed_in? %>
+      <div class="">
+        <label class="pull-right white-text">
+          Conectado como <%= current_account.email %> <%= link_to 'Cerrar Session', destroy_account_session_path, method: :delete, class:'label grey darken-1' %>
+        </label>
+      </div>
+      <% end %>
+      </div>
+    </div>
+  </nav>
+  <body class="container">
+    <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<div class="container">
+  <%= render 'form' %>
+</div>
+
+<div class="mui-panel">
+  <div class="panel-heading grey darken-1">
+    <h3 class="panel-title white-text">UF</h3>
+    <span class="label green accent-4">Mínimo: <%= @uf_min %></span>
+    <span class="label green accent-4">Máximo: <%= @uf_max %></span>
+    <span class="label green accent-4">Promedio: <%= @uf_avg %></span>
+  </div>
+  <div class="panel-body">
+    <div class="col-md-12">
+      <%= line_chart @uf_data, xtitle: "Fechas", ytitle: "Valores", min: @uf_min, max: @uf_ma %>
+    </div>
+  </div>
+</div>
+<div class="mui-panel">
+  <div class="panel-heading grey darken-1">
+    <h3 class="panel-title white-text">Dolar</h3>
+    <span class="label green accent-4">Mínimo: <%= @dolar_min %></span>
+    <span class="label green accent-4">Máximo: <%= @dolar_max %></span>
+    <span class="label green accent-4">Promedio: <%= @dolar_avg %></span>
+  </div>
+  <div class="panel-body">
+    <div class="col-md-12">
+      <%= line_chart @dolar_data, xtitle: "Fechas", ytitle: "Valores", min: @dolar_min, max: @dolar_max %>
+    </div>
+  </div>
+</div>
