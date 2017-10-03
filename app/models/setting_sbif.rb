@@ -1,5 +1,4 @@
 class SettingSbif < ApplicationRecord
-
   scope :between, -> (start_at = '1998-01-01', end_at = (Date.current - 1.day) ) { where('date between ? and ?', start_at.beginning_of_month.strftime('%Y-%m-%d'), end_at.end_of_month.strftime('%Y-%m-%d')) }
 
   def self.min_max(data, method = 'minimum', currency = 'uf')
