@@ -1,14 +1,13 @@
 class HomeController < ApplicationController
-before_action :authenticate_account!
-before_action :validate_date, only: [:search]
+  before_action :authenticate_account!
+  before_action :validate_date, only: [:search]
 
-  def index
-  end
+  def index; end
 
   def search
-    date_one = Date.new(set_params['period(1i)'].to_i,set_params['period(2i)'].to_i)
-    date_two = Date.new(set_params['period_two(1i)'].to_i,set_params['period_two(2i)'].to_i)
-    @sbif_data = SettingSbif.between(date_one,date_two)
+    first_date = set_params[:first_date].to_date
+    second_date = set_params[:second_date].to_date
+    @sbif_data = SettingSbif.between(first_date,second_date)
     @uf_min = SettingSbif.min_max(@sbif_data, 'minimum', 'uf')
     @uf_max = SettingSbif.min_max(@sbif_data, 'maximum', 'uf')
     @uf_data = SettingSbif.chart_data(@sbif_data, 'uf').compact
@@ -22,19 +21,22 @@ before_action :validate_date, only: [:search]
   private
 
   def set_params
-    params.require(:range).permit(:period, :period_two)
+    params.require(:range).permit(:first_date, :second_date)
   end
 
   def validate_date
-    date_one = Date.new(set_params['period(1i)'].to_i,set_params['period(2i)'].to_i)
-    date_two = Date.new(set_params['period_two(1i)'].to_i,set_params['period_two(2i)'].to_i)
-    if date_one > date_two
-      flash[:alert] = "Primer periodo no puede ser mayor que el segundo!. Vuelva a Buscar"
-      redirect_to root_path
+    first_date = set_params[:first_date].to_date
+    second_date = set_params[:second_date].to_date
+    if first_date.present? && second_date.present?
+      if second_date > first_date
+        flash[:notice] = "Busqueda entre los periodos #{set_params[:first_date]} al #{set_params[:second_date]}."
+      else
+        flash[:alert] = 'Primer periodo no puede ser mayor que el segundo!. Vuelva a Buscar'
+        redirect_to root_path
+      end
     else
-      flash[:alert] = "Busqueda entre los periodos #{date_one} - #{date_two}."
+      flash[:alert] = 'Ingresar ambos periodos'
+      redirect_to root_path
     end
-  rescue ActionController::RedirectBackError
-    redirect_to root_path
   end
 end

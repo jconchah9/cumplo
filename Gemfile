@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
 
@@ -14,16 +14,16 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
+
 gem 'devise'
 gem 'httparty'
-gem "chartkick"
-gem 'bootstrap-sass', '~> 3.3.6'
-gem 'bootstrap-material-design'
+
 gem 'materialize-sass'
-gem 'mui-sass'
-gem 'whenever'
+gem 'chartkick'
 gem 'inline_svg'
+
 gem 'sidekiq'
+gem 'whenever'
 
 group :production, :staging do
   gem 'rails_12factor'

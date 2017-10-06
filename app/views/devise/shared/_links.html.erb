@@ -1,9 +1,9 @@
 <%- if controller_name != 'sessions' %>
-  <%= link_to "Iniciar sesión", new_session_path(resource_name),class:'white-text' %><br />
+  <%= link_to "Iniciar sesión", new_session_path(resource_name),class:'green-text' %><br />
 <% end -%>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Crea tu Cuenta", new_registration_path(resource_name), class:'white-text'%><br />
+  <%= link_to "Crea tu Cuenta", new_registration_path(resource_name), class:'green-text'%><br />
 <% end -%>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>

@@ -1,24 +1,33 @@
-<div class="panel">
-  <div class="panel-heading white-text green accent-4">
-    <h3 class="panel-title">Iniciar sesión</h3>
-  </div>
-  <div class="panel-body">
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="form-group">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, class:'form-control', required:'true' %>
-    </div>
+<main class="grey darken-1">
+  <center>
+    <div class="container">
+      <div class="card-panel hoverable" style="display: inline-block;">
+        <div class="">
+          <h5> Iniciar sesión</h5>
 
-    <div class="form-group">
-      <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "off", class:'form-control', required:'true' %>
-    </div>
-    <div class="actions">
-      <%= f.submit "Iniciar Sesión", class:'btn btn-lg white-text grey darken-1' %>
-    </div>
-  <% end %>
-  </div>
-  <div class="panel-footer green accent-4">
-    <%= render "devise/shared/links" %>
-  </div>
-</div>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="row">
+              <div class="col m12 s12">
+                <%= f.label :email %><br />
+                <%= f.email_field :email, autofocus: true, required:'true' %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col m12 s12">
+                <%= f.label :password %><br />
+                <%= f.password_field :password, required:'true' %>
+              </div>
+            </div>
+            <div>
+              <%= f.submit "Iniciar Sesión", class:'btn btn-lg white-text grey darken-1' %>
+            </div>
+          <% end %>
+
+          <div class="center">
+            <%= render "devise/shared/links" %>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </center>
+</main>

@@ -2,9 +2,8 @@ namespace :sbif do
   desc 'task for insert data form sbif'
   task default_data: :environment do
     sbif = SbifService.new
+    data = sbif.range('uf', 1998, 1, Date.current.year, Date.current.month)
 
-    sbif.range('uf', 1998, 1, Date.current.year, Date.current.month)
-    data = sbif.data
     data.each do |d|
       ss = SettingSbif.where(date: d[:date]).first_or_create
       ss.uf = d[:value]
@@ -12,6 +11,7 @@ namespace :sbif do
     end
 
     data = sbif.range('dolar', 1998, 1, Date.current.year, Date.current.month)
+
     data.each do |x|
       ss = SettingSbif.where(date: x[:date]).first_or_create
       ss.dolar = x[:value]

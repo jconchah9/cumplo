@@ -7,28 +7,25 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <nav class="navbar green accent-4 navbar-static-top">
-    <div class="container-fluid">
-      <div class="col-md-6">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/">
+  <body>
+    <header class="navbar-fixed">
+      <nav class="green accent-4">
+        <div class="nav-wrapper container">
+          <a  class="logo-container brand-logo" href="/">
             <%= inline_svg('logo.svg', class:'logo') %>
           </a>
         </div>
-      </div>
-      <div class="col-md-6">
-      <% if account_signed_in? %>
-      <div class="">
-        <label class="pull-right white-text">
-          Conectado como <%= current_account.email %> <%= link_to 'Cerrar Session', destroy_account_session_path, method: :delete, class:'label grey darken-1' %>
-        </label>
-      </div>
+      </nav>
+    </header>
+    <% flash.each do |message_type, message| %>
+      <% if message.class == Array %>
+        <% message.each do |msg| %>
+          <%= javascript_tag "Materialize.toast('#{msg}', 4000, '#{materialize_toast(message_type)}')" %>
+        <% end %>
+      <% else %>
+        <%= javascript_tag "Materialize.toast('#{message}', 4000, '#{materialize_toast(message_type)}')" %>
       <% end %>
-      </div>
-    </div>
-  </nav>
-  <body class="container">
-    <p class="alert deep-orange darken-1" style="<%= 'display:none;' if alert.nil? %>"><%= alert %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>

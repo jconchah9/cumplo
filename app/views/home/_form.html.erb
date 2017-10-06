@@ -1,28 +1,21 @@
-<div class="mui-panel">
-  <div class="panel-heading">
-    <h3 class="panel-title"></h3>
-  </div>
-  <div class="panel-body">
-    <%= form_for :range, url: home_search_path, method: 'GET' do |f| %>
-    <div class="row text-center">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label>Selecciona Primer Periodo</label>
-          <%= f.date_select :period, {order: [:month, :year], start_year: 1998}, class:'form-control input-field'%>
+<div class="card-panel">
+  <%= form_for :range, url: home_search_path, method: :get do |f| %>
+    <div class="row">
+      <div class="col m6">
+        <div class="">
+          <%= f.label :first_date, t(:first_date) %>
+          <%= f.text_field :first_date, class: 'datepicker', required: :true %>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label>Selecciona Segundo Periodo</label>
-          <%= f.date_select :period_two, {order: [:month, :year], start_year: 1998}, class:'form-control input-field'%>
+      <div class="col m6">
+        <div class="">
+          <%= f.label :second_date, t(:second_date) %>
+          <%= f.text_field :second_date, class: 'datepicker', required: :true %>
         </div>
       </div>
     </div>
-    <div class="col-md-6 col-md-offset-6 col-sm-6 col-sm-offset-6">
-      <div class="form-group">
-        <%= f.submit 'Buscar',class:'btn btn-lg white-text grey darken-1 pull-right' %>
-      </div>
-    </div>
-    <% end %>
-  </div>
+    <div class="center">
+      <%= f.submit 'Buscar', class: 'btn white-text grey darken-1' %>
+    </div> 
+  <% end %>
 </div>

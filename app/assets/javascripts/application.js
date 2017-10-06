@@ -12,10 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap-sprockets
-//= require bootstrap
+//= require turbolinks
+//= require materialize-sprockets
 //= require Chart.bundle
 //= require chartkick
-//= require bootstrap-material-design
-//= require turbolinks
 //= require_tree .
