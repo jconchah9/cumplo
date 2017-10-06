@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+
   before_action :authenticate_account!
   before_action :validate_date, only: [:search]
 
@@ -7,15 +8,10 @@ class HomeController < ApplicationController
   def search
     first_date = set_params[:first_date].to_date
     second_date = set_params[:second_date].to_date
-    @sbif_data = SettingSbif.between(first_date,second_date)
-    @uf_min = SettingSbif.min_max(@sbif_data, 'minimum', 'uf')
-    @uf_max = SettingSbif.min_max(@sbif_data, 'maximum', 'uf')
-    @uf_data = SettingSbif.chart_data(@sbif_data, 'uf').compact
-    @uf_avg = SettingSbif.avg(@sbif_data, 'uf')
-    @dolar_min = SettingSbif.min_max(@sbif_data, 'minimum', 'dolar')
-    @dolar_max = SettingSbif.min_max(@sbif_data, 'maximum', 'dolar')
-    @dolar_avg = SettingSbif.avg(@sbif_data, 'dolar')
-    @dolar_data = SettingSbif.chart_data(@sbif_data,'dolar').compact
+    sbif_data = SettingSbif.between(first_date, second_date)
+    @dolar_data = SettingSbif.chart_data(sbif_data, 'dolar')
+    @uf_data = SettingSbif.chart_data(sbif_data)
+    @currency = Utils::Calculator::Currency.new(sbif_data).result
   end
 
   private

@@ -15,5 +15,6 @@ module Cumplo
     config.i18n.default_locale = :es
     config.serve_static_assets = true
     config.active_job.queue_adapter = :sidekiq
+    config.eager_load_paths << Rails.root.join('lib')
   end
 end
