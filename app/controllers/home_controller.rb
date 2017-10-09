@@ -1,5 +1,4 @@
 class HomeController < ApplicationController
-
   before_action :authenticate_account!
   before_action :validate_date, only: [:search]
 

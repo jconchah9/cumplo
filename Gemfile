@@ -25,12 +25,6 @@ gem 'inline_svg'
 gem 'sidekiq'
 gem 'whenever'
 
-group :production, :staging do
-  gem 'rails_12factor'
-  gem 'rails_stdout_logging'
-  gem 'rails_serve_static_assets'
-end
-
 group :development, :test do
   gem 'byebug', platform: :mri
 end
