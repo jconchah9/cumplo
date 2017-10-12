@@ -8,13 +8,39 @@ class SbifService
     @response = nil
   end
 
+  def currency_duo(first_date, second_date)
+    resource = %w(uf dolar)
+    first_date = first_date.to_date
+    second_date = second_date.to_date
+
+    recipient = resource.map do |r|
+      range(r,
+            first_date.year,
+            first_date.month,
+            second_date.year,
+            second_date.month)
+    end
+    merge_recipient(recipient)
+  end
+
+  def merge_recipient(recipient)
+    result_array = recipient.first.map do |first_hash|
+      recipient.second.each do |second_hash|
+        if first_hash[:date] == second_hash[:date]
+          first_hash[:dolar] = second_hash[:dolar]
+          break
+        end
+      end
+      first_hash
+    end
+    result_array
+  end
+
   def range(resource, year, month, year2, month2)
     @response = self.class.get("/api-sbifv3/recursos_api/#{resource}/periodo/#{year}/#{month}/#{year2}/#{month2}?apikey=#{@api_key}&formato=xml")
     @response = response(resource)
-    data
+    data(resource)
   end
-
-  private
 
   def response(resource)
     resource =
@@ -27,9 +53,9 @@ class SbifService
     resource
   end
 
-  def data
+  def data(resource)
     data = @response.map do |x|
-      { date: x['Fecha'], value: value_format(x['Valor']) }
+      { date: x['Fecha'], resource.to_sym => value_format(x['Valor']) }
     end
     data
   end

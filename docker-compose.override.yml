@@ -4,7 +4,7 @@ version: "2"
 services:
   app:
     environment:
-      - RAILS_ENV=production
+      - RAILS_ENV=development
     volumes:
       - .:/rails_app
 

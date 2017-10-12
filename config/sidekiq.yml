@@ -3,5 +3,5 @@ development:
 production:
   concurrency: 2
 queues:
-  - default
+  - jobs
   - mailers
