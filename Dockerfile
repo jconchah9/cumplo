@@ -1,8 +1,7 @@
-# hace referencia a la imagen de ruby que voy a usar version 2.3.0
-FROM ruby:2.3.0
+FROM ruby:2.3.1
 # build essential es requerido para compilar paquetes debian y libpq-dev es para postgres
 # node-js es nuestro javascript runtime
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs cron
 # configura las variables de entorno
 ENV RAILS_ROOT /rails_app
 # crea el directorio tmp/pids en la raiz (rails_app)
@@ -22,3 +21,4 @@ RUN gem install bundler
 RUN bundle install
 # copy todos los archivos de mi aplicacion local a $RAILS_ROOT
 COPY . .
+RUN bundle exec whenever --update-crontab

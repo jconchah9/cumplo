@@ -9,7 +9,7 @@ services:
     # esta en la misma ubicacion que el archivo docker-compose.yml
     build: .
     environment:
-      - RAILS_ENV=production
+      - RAILS_ENV=development
     # cuando se ejecuta el contenedor inmediatamente llama al script startup.sh
     command: [ "/opt/startup.sh" ]
     expose:

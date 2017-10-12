@@ -1,7 +1,6 @@
 set :output, 'log/whenever.log'
+ENV.each { |k, v| env(k, v) }
 
-every '05 03 * * *' do
- rake "sbif:setting_day"
-end
-
+every 1.minute do
+  command 'bundle exec rake sbif:daily_setting'
 end
