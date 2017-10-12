@@ -51,7 +51,7 @@ services:
     depends_on:
       - redis
     # ejecuta el archivo de configuracion sidekiq.yml
-    command: bundle exec sidekiq -C config/sidekiq.yml
+    command: bundle exec sidekiq -C config/sidekiq.yml -q jobs
     env_file: .env
 
   # contenedor nginx
